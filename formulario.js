@@ -1,7 +1,6 @@
 var labels;
 var inputs;
-var contadorAssociados = 0;
-var contadorNaoAssociados = 0;
+var labelsAssociados = 0;
 var casper = require('casper').create();
 
 
@@ -15,11 +14,31 @@ casper.then(function(){
 	labels = this.evaluate(getAttribute("label", "for"));
 	inputs = this.evaluate(getAttribute("input", "id"));
 	if(labels.length === inputs.length){
+		for(var i = 0; i < labels.length; i++){
+			for(var j = 0; j < inputs.length; j++){
+				if(labels[i].att === inputs[j].att){
+					labelsAssociados ++;
+					break;
+				}
+			}
+		}
+	}else if(labels.length > inputs.length){
+		for(var i = 0; i < labels.length; i++){
+			for(var j = 0; j < inputs.length; j++){
+				if(labels[i].att === inputs[j].att){
+					labelsAssociados ++;
+					break;
+				}
+			}
+
+		}
+	}else{
 		for(var i = 0; i < inputs.length; i++){
-			if(labels[i].att === inputs[i].att){
-				contadorAssociados = contadorAssociados + 1;
-			}else{
-				contadorNaoAssociados = contadorNaoAssociados + 1;
+			for(var j = 0; j < labels.length; j++){
+				if(inputs[i].att === labels[j].att){
+					labelsAssociados++;
+					break;
+				}
 			}
 		}
 	}
@@ -28,9 +47,9 @@ casper.then(function(){
 casper.run(function(){
 	this.echo("Quantidade total de inputs : " + inputs.length);
 	this.echo("Quantidade total de labels : " + labels.length);
-	for(var i = 0; i < labels.length; i++){
-		this.echo("label[" + i + "] : " + labels[i].att + " \t-->\t input[" + i + "] : " + inputs[i].att);
-	}
-	this.echo("Total de labels e inputs associados : " + contadorAssociados);
-	this.echo("Total de labels e inputs nao associados : " + contadorNaoAssociados);
+	this.echo("Total de labels associados : " + labelsAssociados);
+	this.echo("Total de inputs associados : " + labelsAssociados);//a quantidade é a mesma de inputs e labels associados, por isso deixei a mesma variavel.
+	this.echo("Total de labels nao associados : " + (labels.length - labelsAssociados));
+	this.echo("Total de inputs nao associados : " + (inputs.length - labelsAssociados));
+	this.exit();
 });
