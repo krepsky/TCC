@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"></meta>
+		<title>Exercicio CSS</title>
+		<!--<link rel="stylesheet" type="text/css" href="AtividadeII.css"></link>-->
+		<style>
+			#dainf{
+				font-size: 30px;	
+			}
+
+			img{
+				width: 60px;
+				height: 30px;
+				margin-left: 300px;
+			}
+
+			.divisao2{
+				background-color: green;
+			}
+
+			#coordenadores{
+				background-color: blue;
+				font-size: 35px;
+				text-decoration: underline;
+				font-style: italic;
+			}
+
+			.divisao3{
+				background-color: red;
+				font-size: 25px;
+			}
+
+			#lidocente{
+				background-color: blue;
+			}
+
+			#docentes{
+				float:left;
+				margin-left: -85px;
+			}
+
+			#li2{
+				background-repeat: repeat;
+				font-size: 25px;
+			}
+
+			#li3{
+				font-size: 45px;
+			}
+
+			#li4{
+				text-decoration: underline;
+				font-style: italic;
+			}
+
+			#secelab{
+					margin-left: 50px;
+			}
+
+		</style>
+	</head>
+	<body>
+		<h1>Exercício CSS 1</h1>
+		<ul>
+			<div class="divisao1">
+				<li><span id="dainf">DAINF</span> <img src="logo.jpg" alt="logo utfpr" class="qualquer" id="idimg"></img></li>
+			</div>
+				<ul>
+					<div class="divisao2">
+					<li >Chefia & Coordenação</li>
+						<ul>
+							<li id="coordenadores">Coordenadores</li>
+							<div class="divisao3">
+							<li class="metrica-cadastrar">Métrica</li>
+								<ul>
+									<li class="metrica-cadastrar">Cadastrar (restrito)</li>
+								</ul>
+							</div>
+						</ul>					
+							<li id="lidocente"><span id="docentes">Docentes</span> </li>
+					</div>
+					<li id="li2">Documentos/Intruções</li>
+					<li id="li3">Estrtura</li>
+					<li id="li4"><span id="secelab">Secretaria e Laboratórios</span></li>
+				</ul>
+			<li>Notícias</li>
+		</ul>
+		<img src="ponte1.jpg" alt="teste"></img>
+		<img src="ponte2.jpg" ></img>
+		<form>
+			<label for="teste">Testando</label>
+			<input type="text" id="teste"></input>
+		</form>
+	</body>
+</html>	
