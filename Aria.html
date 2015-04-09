@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"></meta>
+		<title>aria-label/aria-LabelledBy/aria-describedby</title>
+	</head>
+	<body>
+	<form>
+		<h1>aria-labelledby</h1>
+		<fieldset>
+			<legend>Example 1 : Multiple Labels</legend>
+			<div id="billing">Billing Address</div>
+
+			<div>
+			<div id="name">Name</div>
+			    <input type="text" aria-labelledby="name billing"/>
+			</div>
+			<div>
+			    <div id="address">Address</div>
+			    <input type="text" aria-labelledby="address billing"/>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Example 2: Associating Headings With Regions</legend>
+			<div role="main" aria-labelledby="foo">
+   				<h1 id="foo">Wild fires spread across the San Diego Hills</h1>
+   				Strong winds expand fires ignited by high temperatures ...
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Example 3: Radio Groups</legend>
+			<div id="radio_label">My radio label</div>
+			<ul role="radiogroup" aria-labelledby="radio_label">
+			    <li role="radio">Item #1</li>
+			    <li role="radio">Item #2</li>
+			    <li role="radio">Item #3</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend>Example 4: Dialog Label</legend>
+			<div role="dialog" aria-labelledby="dialogheader">
+			    <h2 id="dialogheader">Choose a File</h2>
+			    ... Dialog contents
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Example 5: Inline Definition</legend>
+			<p>The doctor explained it had been a <dfn id="placebo">placebo</dfn>, or <span role="definition" aria-labelledby="placebo">  
+				or an inert preparation prescribed more for the mental relief of the patient than for its actual effect on a disorder.</span>
+			</p>
+		</fieldset>
+		<fieldset>
+			<legend>Example 6: Definition Lists</legend>
+			<dl>
+			    <dt id="anathema">anthema</dt>
+			    <dd role="definition" aria-labelledby="anathema">a ban or curse solemnly pronounced by ecclesiastical authority
+			                                                     and accompanied by excommunication</dd>
+			    <dd role="definition" aria-labelledby="anathema">a vigorous denunciation : cursor</dd>
+
+			    <dt id="homily">homily</dt>
+			    <dd role="definition" aria-labelledby="homily">a usually short sermon</dd>
+			    <dd role="definition" aria-labelledby="homily">a lecture or discourse on or of a moral theme</dd>
+			</dl>
+		</fieldset>
+		<fieldset>
+			<legend>Example 7: Menus</legend>
+			<div role="menubar">
+			    <div role="menuitem" aria-haspopup="true" id="fileMenu">File</div>
+			    <div role="menu" aria-labelledby="fileMenu">
+			        <div role="menuitem">Open</div>
+			        <div role="menuitem">Save</div>
+			        <div role="menuitem">Save as ...</div>
+			        ...
+			    </div>
+			    ...
+			</div>
+		</fieldset>
+		<h1>aria-label</h1>
+		<fieldset>
+			<legend>Example 1: Multiple Labels</legend>
+			<button aria-label="Close" onclick="myDialog.close()">X</button>
+		</fieldset>
+		<h1>aria-describedby</h1>
+		<fieldset>
+			<legend>Example 1: Application Landmark Descriptions</legend>
+			<div role="applicaton" aria-labelledby="calendar" aria-describedby="info">
+			    <h1 id="calendar">Calendar<h1>
+			    <p id="info">
+			        This calendar shows the game schedule for the Boston Red Sox.
+			    </p>
+			    <div role="grid">
+			        ...
+			    </div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Example 2: A close button</legend>
+			<button aria-label="Close" aria-describedby="descriptionClose" onclick="myDialog.close()">X</button>
+			...
+			<div id="descriptionClose">Closing this window will discard any information entered and return you back to the main page</div>
+		</fieldset>
+	</form>
+	</body>
+</html>
