@@ -9,7 +9,7 @@ function getRoles(){
 function countRoles(roles){
 	var countRole = 0;
 	for(var i = 0; i < roles.length; i++){
-		if((roles[i].role.length > 0) && (roles[i].role !== "null") && (roles[i].role !== "undefined")){
+		if((roles[i].role.length > 0) && (roles[i].role !== "null") && (roles[i].role !== "undefined") && (typeof roles[i].role !== 'undefined')){
 			countRole ++;
 		}
 	}
@@ -19,7 +19,7 @@ function countRoles(roles){
 function getRoleValue(roles){
 	var roleValue = {banner: 0, complementary: 0, contentinfo: 0, form: 0, main: 0, navigation: 0, search: 0, heading: 0};
 	for(var i = 0; i < roles.length; i++){
-		if((roles[i].role.length > 0) && (roles[i].role !== "null") && (roles[i].role !== "undefined")){
+		if((roles[i].role.length > 0) && (roles[i].role !== "null") && (typeof roles[i].role !== 'undefined') && (roles[i].role !== 'undefined')){
 			switch(roles[i].role){
 				case 'banner':
 					roleValue.banner++;

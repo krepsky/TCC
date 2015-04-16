@@ -18,7 +18,7 @@ function countAlt(imgs){
 function countAltAcesisvel(imgs){
 	var countAltAcesisvel = 0;
 	for(var i = 0; i < imgs.length; i++){
-		if((imgs[i].attAlt !== "null") && (imgs[i].attAlt !== null) && (imgs[i].attAlt !== "undefined") && (imgs[i].attAlt !== undefined)){
+		if((imgs[i].attAlt !== "null") && (imgs[i].attAlt !== null) && (typeof imgs[i].attAlt !== 'undefined') && (imgs[i].attAlt !== "undefined") && (imgs[i].attAlt !== undefined)){
 			countAltAcesisvel ++;
 		}
 	}

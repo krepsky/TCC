@@ -8,13 +8,13 @@ function getArias(){
 function countArias(arias){
 	var totalArias = {countLabelledby: 0, countLabel: 0, countDescribedby: 0};
 	for(var i = 0; i < arias.length; i++){
-		if((arias[i].arialabelledby.length > 0) && (arias[i].arialabelledby !== 'null') && (arias[i].arialabelledby !== null) && (arias[i].arialabelledby !== undefined) && (arias[i].arialabelledby !== 'undefined')){
+		if((arias[i].arialabelledby.length > 0) && (arias[i].arialabelledby !== 'null') && (arias[i].arialabelledby !== null) && (typeof arias[i].arialabelledby !== 'undefined') && (arias[i].arialabelledby !== 'undefined')){
 			totalArias.countLabelledby++;
 		}
-		if((arias[i].arialabel.length > 0) && (arias[i].arialabel !== 'null') && ( arias[i].arialabel !== null) && (arias[i].arialabel !== undefined) && (arias[i].arialabel !== 'undefined')){
+		if((arias[i].arialabel.length > 0) && (arias[i].arialabel !== 'null') && (arias[i].arialabel !== null) && (typeof arias[i].arialabel !== 'undefined') && (arias[i].arialabel !== 'undefined')){
 			totalArias.countLabel++;
 		}
-		if((arias[i].ariadescribedby.length > 0) && (arias[i].ariadescribedby !== 'null') && ( arias[i].ariadescribedby !== null) && (arias[i].ariadescribedby !== undefined) && (arias[i].ariadescribedby !== 'undefined')){
+		if((arias[i].ariadescribedby.length > 0) && (arias[i].ariadescribedby !== 'null') && (arias[i].ariadescribedby !== null) && (typeof arias[i].ariadescribedby !== 'undefined') && (arias[i].ariadescribedby !== 'undefined')){
 			totalArias.countDescribedby++;
 		}
 	}
@@ -35,13 +35,13 @@ casper.run(function(){
 	this.echo("Total de tag(s) com aria-describedby: " + countArias(arias).countDescribedby);
 	this.echo("...ARIAS-LABEL/LABELEDBY/DESCRIBEDBY...");
 	for(var i = 0; i < arias.length; i++){
-		if((arias[i].arialabelledby.length > 0) && (arias[i].arialabelledby !== 'null') && (arias[i].arialabelledby !== null) && (arias[i].arialabelledby !== undefined) && (arias[i].arialabelledby !== 'undefined')){
-			this.echo("[aria-labelledby] - " + arias[i].arialabelledby);
+		if((arias[i].arialabelledby.length > 0) && (arias[i].arialabelledby !== 'null') && (arias[i].arialabelledby !== null) && (typeof arias[i].arialabelledby !== 'undefined') && (arias[i].arialabelledby !== 'undefined')){
+			this.echo("[aria-labelledby] - " + arias[i].arialabelledby + " tipo - " + typeof arias[i].arialabelledby);
 		}
-		if((arias[i].arialabel.length > 0) && (arias[i].arialabel !== 'null') && ( arias[i].arialabel !== null) && (arias[i].arialabel !== undefined) && (arias[i].arialabel !== 'undefined')){
+		if((arias[i].arialabel.length > 0) && (arias[i].arialabel !== 'null') && ( arias[i].arialabel !== null) && (typeof arias[i].arialabel !== 'undefined') && (arias[i].arialabel !== 'undefined')){
 			this.echo("[aria-label] - " + arias[i].arialabel);
 		}
-		if((arias[i].ariadescribedby.length > 0) && (arias[i].ariadescribedby !== 'null') && ( arias[i].ariadescribedby !== null) && (arias[i].ariadescribedby !== undefined) && (arias[i].ariadescribedby !== 'undefined')){
+		if((arias[i].ariadescribedby.length > 0) && (arias[i].ariadescribedby !== 'null') && ( arias[i].ariadescribedby !== null) && (typeof arias[i].ariadescribedby !== 'undefined') && (arias[i].ariadescribedby !== 'undefined')){
 			this.echo("[aria-describedby] - " + arias[i].ariadescribedby);
 		}
 	}
