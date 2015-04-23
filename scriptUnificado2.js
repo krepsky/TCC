@@ -82,7 +82,7 @@ function getAllTag(){
 
 var casper = require('casper').create();
 
-casper.start('C:/Users/Krepsky/Documents/NetBeansProjects/ProgWeb/public_html/Atividades/AtividadeII.html');
+casper.start(casper.cli.get(0));
 
 casper.then(function(){
 	imgs = this.evaluate(getAttributes("img","alt"));
