@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"></meta>
+		<title>Exercicio CSS</title>
+		<!--<link rel="stylesheet" type="text/css" href="AtividadeII.css"></link>-->
+		<style>
+			#dainf{
+				font-size: 30px;	
+			}
+
+			img{
+				width: 60px;
+				height: 30px;
+				margin-left: 300px;
+			}
+
+			.divisao2{
+				background-color: green;
+			}
+
+			#coordenadores{
+				background-color: blue;
+				font-size: 35px;
+				text-decoration: underline;
+				font-style: italic;
+			}
+
+			.divisao3{
+				background-color: red;
+				font-size: 25px;
+			}
+
+			#lidocente{
+				background-color: blue;
+			}
+
+			#docentes{
+				float:left;
+				margin-left: -85px;
+			}
+
+			#li2{
+				background-repeat: repeat;
+				font-size: 25px;
+			}
+
+			#li3{
+				font-size: 45px;
+			}
+
+			#li4{
+				text-decoration: underline;
+				font-style: italic;
+			}
+
+			#secelab{
+					margin-left: 50px;
+			}
+
+		</style>
+	</head>
+	<body>
+		<h1>Exercício CSS 1</h1>
+		<ul>
+			<div class="divisao1">
+				<li><span id="dainf">DAINF</span> <img src="logo.jpg" alt="logo utfpr" class="qualquer" id="idimg"></img></li>
+			</div>
+				<ul>
+					<div class="divisao2">
+					<li >Chefia & Coordenação</li>
+						<ul>
+							<li id="coordenadores">Coordenadores</li>
+							<div class="divisao3">
+							<li class="metrica-cadastrar">Métrica</li>
+								<ul>
+									<li class="metrica-cadastrar">Cadastrar (restrito)</li>
+								</ul>
+							</div>
+						</ul>					
+							<li id="lidocente"><span id="docentes">Docentes</span> </li>
+					</div>
+					<li id="li2">Documentos/Intruções</li>
+					<li id="li3">Estrtura</li>
+					<li id="li4"><span id="secelab">Secretaria e Laboratórios</span></li>
+				</ul>
+			<li>Notícias</li>
+		</ul>
+		<img src="ponte1.jpg" alt="teste"></img>
+		<img src="ponte2.jpg" ></img>
+		<img src="ponte2.jpg" alt="null"></img>
+		<img src="ponte2.jpg" alt=null></img>
+		<img src="ponte2.jpg" alt=undefined></img>
+		<img src="ponte2.jpg" alt="undefined"></img>
+		<form>
+			<label for="teste">Testando</label>
+			<input type="text" id="teste"></input>
+		</form>
+		<header role="banner">
+			Conteúdos do topo do site
+		</header>
+		<header role="banner">
+			Conteúdos do topo do site
+		</header>
+		<article>
+		  <header role="heading">
+		    Cabeçalho do artigo
+		  </header>
+		    Conteúdos do artigo
+		    <p role="contentinfo">Aqui vai um paragrafo!</p>
+		    <form role="form"></form>
+		    <footer role="complementary"> 
+		  		Conteúdo informativo de um artigo
+			</footer>
+		</article>
+		<aside role="complementary">
+		  Conteúdo suplementar
+		</aside>
+		<footer role="contentinfo"> 
+		  Conteúdo do rodapé da página
+		</footer>
+		<h1>aria-labelledby</h1>
+		<fieldset>
+			<legend>Example 1 : Multiple Labels</legend>
+			<div id="billing">Billing Address</div>
+
+			<div>
+			<div id="name">Name</div>
+			    <input type="text" aria-labelledby="name billing"/>
+			</div>
+			<div>
+			    <div id="address">Address</div>
+			    <input type="text" aria-labelledby="address billing"/>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Example 2: Associating Headings With Regions</legend>
+			<div role="main" aria-labelledby="foo">
+   				<h1 id="foo">Wild fires spread across the San Diego Hills</h1>
+   				Strong winds expand fires ignited by high temperatures ...
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Example 3: Radio Groups</legend>
+			<div id="radio_label">My radio label</div>
+			<ul role="radiogroup" aria-labelledby="radio_label">
+			    <li role="radio">Item #1</li>
+			    <li role="radio">Item #2</li>
+			    <li role="radio">Item #3</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend>Example 4: Dialog Label</legend>
+			<div role="dialog" aria-labelledby="dialogheader">
+			    <h2 id="dialogheader">Choose a File</h2>
+			    ... Dialog contents
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Example 5: Inline Definition</legend>
+			<p>The doctor explained it had been a <dfn id="placebo">placebo</dfn>, or <span role="definition" aria-labelledby="placebo">  
+				or an inert preparation prescribed more for the mental relief of the patient than for its actual effect on a disorder.</span>
+			</p>
+		</fieldset>
+		<fieldset>
+			<legend>Example 6: Definition Lists</legend>
+			<dl>
+			    <dt id="anathema">anthema</dt>
+			    <dd role="definition" aria-labelledby="anathema">a ban or curse solemnly pronounced by ecclesiastical authority
+			                                                     and accompanied by excommunication</dd>
+			    <dd role="definition" aria-labelledby="anathema">a vigorous denunciation : cursor</dd>
+
+			    <dt id="homily">homily</dt>
+			    <dd role="definition" aria-labelledby="homily">a usually short sermon</dd>
+			    <dd role="definition" aria-labelledby="homily">a lecture or discourse on or of a moral theme</dd>
+			</dl>
+		</fieldset>
+		<fieldset>
+			<legend>Example 7: Menus</legend>
+			<div role="menubar">
+			    <div role="menuitem" aria-haspopup="true" id="fileMenu">File</div>
+			    <div role="menu" aria-labelledby="fileMenu">
+			        <div role="menuitem">Open</div>
+			        <div role="menuitem">Save</div>
+			        <div role="menuitem">Save as ...</div>
+			        ...
+			    </div>
+			    ...
+			</div>
+		</fieldset>
+		<h1>aria-label</h1>
+		<fieldset>
+			<legend>Example 1: Multiple Labels</legend>
+			<button aria-label="Close" onclick="myDialog.close()">X</button>
+		</fieldset>
+		<h1>aria-describedby</h1>
+		<fieldset>
+			<legend>Example 1: Application Landmark Descriptions</legend>
+			<div role="applicaton" aria-labelledby="calendar" aria-describedby="info">
+			    <h1 id="calendar">Calendar<h1>
+			    <p id="info">
+			        This calendar shows the game schedule for the Boston Red Sox.
+			    </p>
+			    <div role="grid">
+			        ...
+			    </div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Example 2: A close button</legend>
+			<button aria-label="Close" aria-describedby="descriptionClose" onclick="myDialog.close()">X</button>
+			...
+			<div id="descriptionClose">Closing this window will discard any information entered and return you back to the main page</div>
+		</fieldset>
+	</form>
+		<form>
+		<fieldset>
+			<legend>Formulario 1</legend>
+			<label for="nomes">Nome:</label>
+			<input type="text" id="nome" class="inputtext" placeholder="Digite seu nome"/>
+			<label for="idade">Idade:</label>
+			<input type="text" id="idade" class="inputtext" placeholder="Digite sua idade"/>
+		</fieldset>		
+		<fieldset>	
+			<legend>Formulario 2</legend>
+			<label for="profissoes">Profissao:</label>
+			<input type="text" id="profissao" class="inputtext" placeholder="Digite sua profissao"/>
+			<label for="admissao">Admissao:</label>
+			<input type="text" id="admissao" class="inputtext" placeholder="Digite data de admissao"/>
+		</fieldset>		
+		<fieldset>	
+			<legend>Formulario 3</legend>
+			<label for="telefone">Telefone:</label>
+			<input type="text" id="telefone" class="inputtext" placeholder="Digite seu telefone"/>
+			<label for="celulares">Celular:</label>
+			<input type="text" id="celular" class="inputtext" placeholder="Digite seu celular"/>
+		</fieldset>
+	</form>
+	</body>
+</html>	
