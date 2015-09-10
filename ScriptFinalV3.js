@@ -1,127 +1,151 @@
 //Declaração do objeto que contém todos os resultados das consultas.
 var result = {};
-var aux = "";
-var sep = ",";
 var fs = require('fs');
-var urls = [ "https://web.archive.org/web/20050201182221/http://www.google.com",    "https://web.archive.org/web/20050730075405/http://www.google.com/", 
-             "https://web.archive.org/web/20060131170714/http://www.google.com/",   "https://web.archive.org/web/20060731215816/http://www.google.com/",
-             "https://web.archive.org/web/20070131220054/http://www.google.com/",   "https://web.archive.org/web/20070731162845/http://www9.google.com/", 
-             "http://web.archive.org/web/20080131051219/http://www.google.com/",    "http://web.archive.org/web/20080730200402/http://www.google.com/",
-             "http://web.archive.org/web/20090131094934/http://google.com/",        "http://web.archive.org/web/20090730202417/http://www.google.com/",
-             "http://web.archive.org/web/20100131005725/http://www.google.com/",    "http://web.archive.org/web/20100731012926/http://www.google.com/",
-             "http://web.archive.org/web/20110131012858/http://www.google.com/",    "http://web.archive.org/web/20110731003335/http://www.google.com/",
-             "http://web.archive.org/web/20120131000058/http://www.google.com/",    "http://web.archive.org/web/20120731000321/http://www.google.com/",
-             "http://web.archive.org/web/20130131000002/http://www.google.com/",    "http://web.archive.org/web/20130731000327/http://www.google.com/",
-             "http://web.archive.org/web/20140110000030/https://www.google.com/",   "http://web.archive.org/web/20140731010335/http://www.google.com/",
-             "http://web.archive.org/web/20150131005754/http://www.google.com/",    "http://web.archive.org/web/20150514000018/http://www.google.com/",
-             //22 linhas no excel do google jan/2005 á maio/2015.
-             "http://web.archive.org/web/20050806011211/http://facebook.com/",      "http://web.archive.org/web/20051231034823/http://www.facebook.com/",
-             "http://web.archive.org/web/20060130101746/http://www.facebook.com/",  "http://web.archive.org/web/20060730085137/http://www.facebook.com/",
-             "http://web.archive.org/web/20070129062108/http://www.facebook.com/",  "http://web.archive.org/web/20070712100506/http://www.facebook.com//",
-             "http://web.archive.org/web/20080130203428/http://www.facebook.com/",  "http://web.archive.org/web/20080730182335/https://www.facebook.com/",
-             "http://web.archive.org/web/20090130205521/http://www.facebook.com/",  "http://web.archive.org/web/20090731022014/http://www.facebook.com/",
-             "http://web.archive.org/web/20100131025314/http://www.facebook.com/",  "http://web.archive.org/web/20100708190529/http://www.facebook.com/",
-             "https://web.archive.org/web/20110226031043/http://www.facebook.com/",  "http://web.archive.org/web/20110731122611/http://www.facebook.com/",
-             "http://web.archive.org/web/20120131014823/http://www.facebook.com/",  "https://web.archive.org/web/20120829023516/https://www.facebook.com/",
-             "http://web.archive.org/web/20130130192234/https://www.facebook.com/", "http://web.archive.org/web/20130731001417/https://www.facebook.com/",
-             "http://web.archive.org/web/20140131001428/https://www.facebook.com/", "http://web.archive.org/web/20140731011215/https://www.facebook.com/",
-             "http://web.archive.org/web/20150131001300/https://www.facebook.com/", "http://web.archive.org/web/20150514120906/https://m.facebook.com/?_rdr&refsrc=https%3A%2F%2Fwww.facebook.com%2F",
-             //22 linhas facebook ago/2005 á maio/2015
-             "http://web.archive.org/web/20050428014715/http://www.youtube.com/", "http://web.archive.org/web/20051231053048/http://youtube.com/",
-             "http://web.archive.org/web/20060131190006/http://www.youtube.com/", "http://web.archive.org/web/20060731142744/http://www.youtube.com/",
-             "http://web.archive.org/web/20070131215857/http://www.youtube.com/", "http://web.archive.org/web/20070726004727/http://www.youtube.com/",
-             "http://web.archive.org/web/20080130194043/http://it.youtube.com/", "http://web.archive.org/web/20080731235206/http://www.youtube.com/",
-             "http://web.archive.org/web/20090131164021/http://www.youtube.com/", "http://web.archive.org/web/20090731071254/http://www.youtube.com/",
-             "http://web.archive.org/web/20100131094838/http://www.youtube.com/", "http://web.archive.org/web/20100730025118/http://www.youtube.com/",
-             "http://web.archive.org/web/20110131014430/http://youtube.com/", "http://web.archive.org/web/20110731000924/http://www.youtube.com/",
-             "http://web.archive.org/web/20120131000842/http://www.youtube.com/", "http://web.archive.org/web/20120731000818/http://www.youtube.com/",
-             "http://web.archive.org/web/20130131000241/https://www.youtube.com/", "http://web.archive.org/web/20130731000003/http://www.youtube.com/",
-             "http://web.archive.org/web/20140131000224/http://www.youtube.com/", "http://web.archive.org/web/20140731004221/https://www.youtube.com/",
-             "http://web.archive.org/web/20150131002322/https://www.youtube.com/", "http://web.archive.org/web/20150514011011/https://www.youtube.com/",
-             //22 linhas de youtube desde abril/2005 á maio/2015
-             "http://web.archive.org/web/20050130013612/http://yahoo.com", "http://web.archive.org/web/20050731091526/http://www.yahoo.com/",
-             "http://web.archive.org/web/20060130145509/http://www.yahoo.com/", "http://web.archive.org/web/20060731192018/http://www.yahoo.com/",
-             "http://web.archive.org/web/20070202002446/http://www.yahoo.com/", "http://web.archive.org/web/20070727100829/http://www.yahoo.com",
-             "http://web.archive.org/web/20080131153709/http://www.yahoo.com/", "http://web.archive.org/web/20080731055839/http://www.yahoo.com/",
-             "http://web.archive.org/web/20090131095939/http://www.yahoo.com/", "http://web.archive.org/web/20090730020649/http://www.yahoo.com/",
-             "http://web.archive.org/web/20100131081810/http://m.www.yahoo.com/", "http://web.archive.org/web/20100731021431/http://www.yahoo.com/",
-             "http://web.archive.org/web/20110131015219/http://www.yahoo.com/", "http://web.archive.org/web/20110731003221/http://www.yahoo.com/",
-             "http://web.archive.org/web/20120131001728/http://www.yahoo.com/", "http://web.archive.org/web/20120731004630/http://www.yahoo.com/",
-             "http://web.archive.org/web/20130131000718/http://www.yahoo.com/", "http://web.archive.org/web/20130731000155/http://www.yahoo.com/",
-             "http://web.archive.org/web/20140131001246/https://www.yahoo.com/", "http://web.archive.org/web/20140731002623/https://www.yahoo.com/",
-             "http://web.archive.org/web/20150131001752/http://www.yahoo.com/", "http://web.archive.org/web/20150513233212/https://www.yahoo.com/",
-             //22 linhas de yahoo janeiro/2005 á maio/2015
-             "https://web.archive.org/web/20050131005905/http://www.amazon.com/exec/obidos/subst/home/home.html", "https://web.archive.org/web/20050730232822/http://www.amazon.com/exec/obidos/subst/home/home.html",
-             "https://web.archive.org/web/20060131000907/http://www.amazon.com/exec/obidos/subst/home/home.html", "https://web.archive.org/web/20060706055213/http://www.amazon.com/exec/obidos/subst/home/home.html",
-             "https://web.archive.org/web/20070130004023/http://www.amazon.com/", "https://web.archive.org/web/20070731172336/http://www.amazon.com",
-             "https://web.archive.org/web/20080131035227/http://www.amazon.com/", "https://web.archive.org/web/20080731142958/http://www.amazon.com/",
-             "https://web.archive.org/web/20090131031644/http://www.amazon.com/", "https://web.archive.org/web/20090731123508/http://www.amazon.com/",
-             "https://web.archive.org/web/20100131160212/http://www.amazon.com/", "https://web.archive.org/web/20100731014524/http://www.amazon.com/",
-             "https://web.archive.org/web/20110131072923/http://www.amazon.com/", "https://web.archive.org/web/20110731004032/http://www.amazon.com/",
-             "https://web.archive.org/web/20120131000749/http://www.amazon.com/", "https://web.archive.org/web/20120731042432/http://www.amazon.com/",
-             "https://web.archive.org/web/20130131005336/http://www.amazon.com/", "https://web.archive.org/web/20130731010421/http://www.amazon.com/",
-             "https://web.archive.org/web/20140131011830/http://www.amazon.com/", "https://web.archive.org/web/20140731014342/http://amazon.com/",
-             "https://web.archive.org/web/20150131000952/http://www.amazon.com/", "https://web.archive.org/web/20150512234456/http://www.amazon.com/",
-             // 22 linhas de amazon janeiro/2005 á maio/2015
-             "https://web.archive.org/web/20050131093051/http://www.wikipedia.org/", "https://web.archive.org/web/20050731093015/http://www.wikipedia.org/",
-             "https://web.archive.org/web/20060131091326/http://www.wikipedia.org/", "https://web.archive.org/web/20060731194034/http://www.wikipedia.org/",
-             "https://web.archive.org/web/20070110025106/http://www.wikipedia.org/", "https://web.archive.org/web/20070727223135/http://wikipedia.org/",
-             "https://web.archive.org/web/20080123082416/http://www.wikipedia.org/", "https://web.archive.org/web/20080729182305/http://wikipedia.org/",
-             "https://web.archive.org/web/20090121021126/http://www.wikipedia.org/", "https://web.archive.org/web/20090730081838/http://www.wikipedia.org//",
-             "https://web.archive.org/web/20100127185458/http://www.wikipedia.org/", "https://web.archive.org/web/20100730073448/http://www.wikipedia.org/",
-             "https://web.archive.org/web/20110129004838/http://www.wikipedia.org/", "https://web.archive.org/web/20110731183919/http://www.wikipedia.org/",
-             "https://web.archive.org/web/20120131001441/http://www.wikipedia.org/", "https://web.archive.org/web/20120731145321/http://www.wikipedia.org/",
-             "https://web.archive.org/web/20130130220443/http://www.wikipedia.org/", "https://web.archive.org/web/20130730033042/http://www.wikipedia.org/",
-             "https://web.archive.org/web/20140131052346/http://www.wikipedia.org/", "https://web.archive.org/web/20140731051921/http://www.wikipedia.org/",
-             "https://web.archive.org/web/20150130232226/http://www.wikipedia.org/", "https://web.archive.org/web/20150513090030/http://www.wikipedia.org/",
-             //22 linhas de wikipedia janeiro/2005 á maio/2015
-             "https://web.archive.org/web/20050131094357/http://www.taobao.com/", "https://web.archive.org/web/20050731010120/http://www.taobao.com/",
-             "https://web.archive.org/web/20060131094658/http://www.taobao.com/", "https://web.archive.org/web/20060718001603/http://www.taobao.com/",
-             "https://web.archive.org/web/20070129085757/http://www.taobao.com/#Content", "https://web.archive.org/web/20070711172425/http://www.taobao.com/",
-             "https://web.archive.org/web/20080222182953/http://www.taobao.com/", "https://web.archive.org/web/20080725103049/http://www.taobao.com/",
-             "https://web.archive.org/web/20090130112627/http://www.taobao.com/", "https://web.archive.org/web/20090714082328/http://www.taobao.com/",
-             "https://web.archive.org/web/20100122204433/http://www.taobao.com/", "https://web.archive.org/web/20100813112014/http://www.taobao.com/",
-             "https://web.archive.org/web/20110131090536/http://www.taobao.com/index_global.php", "https://web.archive.org/web/20110731070754/http://www.taobao.com/index_global.php",
-             "https://web.archive.org/web/20120131030057/http://www.taobao.com/", "https://web.archive.org/web/20120731073331/http://www.taobao.com/",
-             "https://web.archive.org/web/20130130075849/http://www.taobao.com/", "https://web.archive.org/web/20130731014220/http://www.taobao.com/",
-             "https://web.archive.org/web/20140125171025/http://www.taobao.com/market/global/index_new.php", "https://web.archive.org/web/20140730170834/http://www.taobao.com/market/global/index_new.php",
-             "https://web.archive.org/web/20150131031116/http://www.taobao.com/market/global/index_new.php", "https://web.archive.org/web/20150512083029/http://www.taobao.com/market/global/index_new.php",
-             //22 linhas de taobao janeiro/2005 á maio/2015
-             "https://web.archive.org/web/20060930214639/http://twitter.com/", "https://web.archive.org/web/20061230202933/http://twitter.com/",
-             "https://web.archive.org/web/20070129052251/http://twitter.com/", "https://web.archive.org/web/20070725182849/http://twitter.com/",
-             "https://web.archive.org/web/20080131085850/http://twitter.com/", "https://web.archive.org/web/20080731045131/http://twitter.com/",
-             "https://web.archive.org/web/20090130050425/https://twitter.com/", "https://web.archive.org/web/20090731184208/http://twitter.com/",
-             "https://web.archive.org/web/20100128023221/http://twitter.com/", "https://web.archive.org/web/20100730054106/http://twitter.com/",
-             "https://web.archive.org/web/20110131071116/http://twitter.com/", "https://web.archive.org/web/20110731003242/http://twitter.com/",
-             "https://web.archive.org/web/20120131000050/http://twitter.com/", "https://web.archive.org/web/20120731000830/http://twitter.com/",
-             "https://web.archive.org/web/20130131000554/http://twitter.com/", "https://web.archive.org/web/20130730003933/https://twitter.com/",
-             "https://web.archive.org/web/20140131000621/https://twitter.com/", "https://web.archive.org/web/20140731005506/https://twitter.com/",
-             "https://web.archive.org/web/20150131000652/https://twitter.com/", "https://web.archive.org/web/20150514024243/https://twitter.com",
-             //20 linhas de twitter setembro/2006 á maio/2015
-             "https://web.archive.org/web/20050131091652/http://www.qq.com/", "https://web.archive.org/web/20050730091503/http://www.qq.com/",
-             "https://web.archive.org/web/20060131190243/http://www.qq.com/", "https://web.archive.org/web/20060720040430/http://www.qq.com/?",
-             "https://web.archive.org/web/20070128105841/http://www.qq.com/?", "https://web.archive.org/web/20070711094126/http://www.qq.com/",
-             "https://web.archive.org/web/20080110012559/http://www.qq.com/", "https://web.archive.org/web/20080818035239/http://www.qq.com/",
-             "https://web.archive.org/web/20090126003457/http://www.qq.com/", "https://web.archive.org/web/20090722203527/http://www.qq.com/",
-             "https://web.archive.org/web/20100119091652/http://www.qq.com/", "https://web.archive.org/web/20100710035003/http://www.qq.com/",
-             "https://web.archive.org/web/20110129015111/http://www.qq.com/", "https://web.archive.org/web/20110731022323/http://www.qq.com/",
-             "https://web.archive.org/web/20120126001633/http://www.qq.com/", "https://web.archive.org/web/20120731104606/http://www.qq.com/",
-             "https://web.archive.org/web/20130131023957/http://www.qq.com/", "https://web.archive.org/web/20130730021627/http://qq.com/",
-             "https://web.archive.org/web/20140131002025/http://www.qq.com/", "https://web.archive.org/web/20140731002624/http://www.qq.com/",
-             "https://web.archive.org/web/20150131091846/http://qq.com/", "https://web.archive.org/web/20150514053839/http://www.qq.com/",
-             //22 linhas de qq janeiro/2005 á maio/2015
-             "https://web.archive.org/web/20050131093709/http://www.google.co.in/", "https://web.archive.org/web/20050731013640/http://www.google.co.in/",
-             "https://web.archive.org/web/20060131090731/http://www.google.co.in/", "https://web.archive.org/web/20060721035716/http://www.google.co.in/",
-             "https://web.archive.org/web/20070129115319/http://www.google.co.in/", "https://web.archive.org/web/20070714123744/http://www.google.co.in/#",
-             "https://web.archive.org/web/20080126151402/http://www.google.co.in./", "https://web.archive.org/web/20080625025838/http://google.co.in/",
-             "https://web.archive.org/web/20090115212328/http://www.google.co.in./", "https://web.archive.org/web/20090728062906/http://www.google.co.in/",
-             "https://web.archive.org/web/20100131150937/http://www.google.co.in/", "https://web.archive.org/web/20100730103120/http://www.google.co.in/",
-             "https://web.archive.org/web/20110131203826/http://www.google.co.in/", "https://web.archive.org/web/20110731014939/http://www.google.co.in/",
-             "https://web.archive.org/web/20120131040222/http://www.google.co.in/", "https://web.archive.org/web/20120731012818/http://www.google.co.in/",
-             "https://web.archive.org/web/20130131004854/http://www.google.co.in/", "https://web.archive.org/web/20130731001411/http://www.google.co.in/",
-             "https://web.archive.org/web/20140131074026/http://www.google.co.in/", "https://web.archive.org/web/20140731000049/http://www.google.co.in/",
-             "https://web.archive.org/web/20150131083825/http://www.google.co.in/", "https://web.archive.org/web/20150505001523/http://www.google.co.in/"];
-             //22 linhas de google da india janeiro/2005 á maio/2015
+/*
+
+*/
+var urls = [//'https://web.archive.org/web/20050629105649/http://www.google.com/'
+            //'https://web.archive.org/web/20051231125518/http://www.google.com/'
+            //'https://web.archive.org/web/20060629044206/http://www.google.com/'
+            //'https://web.archive.org/web/20061231074214/http://www.google.com/'
+            //'https://web.archive.org/web/20070629074743/http://www.google.com/'
+            //'https://web.archive.org/web/20071227140401/http://www.google.com/'
+            //'https://web.archive.org/web/20080625142603/http://www.google.com/'
+            //'https://web.archive.org/web/20081231015557/http://www.google.com/'
+            //'https://web.archive.org/web/20090630021023/http://www.google.com/'
+            //'https://web.archive.org/web/20091231063506/http://www.google.com/'
+            //'https://web.archive.org/web/20100630153309/http://www.google.com/'
+            //'https://web.archive.org/web/20101230033904/http://www.google.com/'
+            //'https://web.archive.org/web/20110630013155/http://www.google.com/'
+            //'https://web.archive.org/web/20111230000404/https://www.google.com/'
+            //'https://web.archive.org/web/20120630000118/https://www.google.com/'
+            //'https://web.archive.org/web/20121230001430/http://www.google.com/'
+            //'https://web.archive.org/web/20130630002544/http://www.google.com/'
+            //'https://web.archive.org/web/20130630002544/http://www.google.com/'
+            //'https://web.archive.org/web/20131230000006/http://www.google.com/'
+            //'https://web.archive.org/web/20140520000146/http://www.google.com/'
+            //'https://web.archive.org/web/20141203135513/https://www.google.com'
+            //'https://web.archive.org/web/20140520000146/http://www.google.com/'
+            //'https://web.archive.org/web/20141203135513/https://www.google.com'
+            //'https://web.archive.org/web/20150630110703/https://www.google.com/'
+            //'https://web.archive.org/web/20150812000010/http://www.google.com/'
+
+            //'https://web.archive.org/web/20050828205250/http://facebook.com/'
+            //'https://web.archive.org/web/20051231034823/http://www.facebook.com/'
+            //'https://web.archive.org/web/20060628200832/http://www.facebook.com/'
+            //'https://web.archive.org/web/20061229172927/http://www.facebook.com/'
+            //'https://web.archive.org/web/20070630042510/http://www.facebook.com/'
+            //'https://web.archive.org/web/20071227060510/http://www.facebook.com/'
+            //'https://web.archive.org/web/20080625145401/http://www.facebook.com/'
+            //'https://web.archive.org/web/20081224065634/http://www.facebook.com/'
+            //'https://web.archive.org/web/20090629022049/http://www.facebook.com//'
+            //'https://web.archive.org/web/20091230085626/http://www.facebook.com/'
+            //'https://web.archive.org/web/20100618211610/http://www.facebook.com/'
+            //'https://web.archive.org/web/20100929171227/https://www.facebook.com/'
+            //'https://web.archive.org/web/20110629013119/http://www.facebook.com/'
+            //'https://web.archive.org/web/20111229003536/http://www.facebook.com/'
+            //'https://web.archive.org/web/20120629023631/https://www.facebook.com/'
+            //'https://web.archive.org/web/20121228025355/https://www.facebook.com/'
+            //'https://web.archive.org/web/20130628000210/https://www.facebook.com/'
+            //'https://web.archive.org/web/20131227003412/https://www.facebook.com/'
+            //'https://web.archive.org/web/20140627233718/https://www.facebook.com/'
+            //'https://web.archive.org/web/20141214221421/https://www.facebook.com/'
+            //'https://web.archive.org/web/20150628004255/https://www.facebook.com/'
+            
+            //'https://web.archive.org/web/20050629030521/http://www.youtube.com/'
+            //'https://web.archive.org/web/20051220073213/http://www.youtube.com/'
+            //'https://web.archive.org/web/20060622215407/http://www.youtube.com/'
+            //'https://web.archive.org/web/20061227222717/http://www.youtube.com/'
+            //'https://web.archive.org/web/20070625121032/http://youtube.com/'
+            //'https://web.archive.org/web/20071226194420/http://youtube.com/'
+            //'https://web.archive.org/web/20080625193704/http://youtube.com/'
+            //'https://web.archive.org/web/20081225045553/http://www.youtube.com/'
+            //'https://web.archive.org/web/20090625012521/http://www.youtube.com/'
+            //'https://web.archive.org/web/20091227095944/http://www.youtube.com/'
+            //'https://web.archive.org/web/20100625130706/http://www.youtube.com/'
+            //'https://web.archive.org/web/20101225045211/http://www.youtube.com//'
+            //'https://web.archive.org/web/20110625121738/http://www.youtube.com/'
+            //'https://web.archive.org/web/20111225014304/http://www.youtube.com/'
+            //'https://web.archive.org/web/20120625013809/http://www.youtube.com/'
+            //'https://web.archive.org/web/20121225002526/https://www.youtube.com/'
+            //'https://web.archive.org/web/20130625001712/https://www.youtube.com/'
+            //'https://web.archive.org/web/20131225002314/http://www.youtube.com/'
+            //'https://web.archive.org/web/20140625001553/http://www.youtube.com/'
+            //'https://web.archive.org/web/20141225001538/https://www.youtube.com/'
+            //'https://web.archive.org/web/20150625001839/https://www.youtube.com/'
+
+            //'https://web.archive.org/web/20050625053654/http://www.yahoo.com/'
+            //'https://web.archive.org/web/20051225034351/http://www.yahoo.com/?'
+            //'https://web.archive.org/web/20060626191741/http://www.yahoo.com/'
+            //'https://web.archive.org/web/20061224175139/http://www.yahoo.com/'
+            //'https://web.archive.org/web/20070625111152/http://www.yahoo.com/'
+            //'https://web.archive.org/web/20071225113056/http://www.yahoo.com/'
+            //'https://web.archive.org/web/20080625142604/http://www.yahoo.com/'
+            //'https://web.archive.org/web/20081225073147/http://www.yahoo.com/'
+            //'https://web.archive.org/web/20090624050702/http://www.yahoo.com/'
+            //'https://web.archive.org/web/20091031173650/http://www.yahoo.com/'
+            //'https://web.archive.org/web/20100625004834/http://www.yahoo.com//'
+            //'https://web.archive.org/web/20101225135724/http://www.yahoo.com/'
+            //'https://web.archive.org/web/20110625120839/http://www.yahoo.com/'
+            //'https://web.archive.org/web/20111225001127/http://www.yahoo.com/'
+            //'https://web.archive.org/web/20120625005416/http://www.yahoo.com/'
+            //'https://web.archive.org/web/20121225001649/http://www.yahoo.com/'
+            //'https://web.archive.org/web/20130625000012/http://www.yahoo.com/'
+            //'https://web.archive.org/web/20131225000723/http://www.yahoo.com/'
+            //'https://web.archive.org/web/20140625000029/https://www.yahoo.com/'
+            //'https://web.archive.org/web/20141225000616/https://www.yahoo.com/'
+            //'https://web.archive.org/web/20150624225602/https://www.yahoo.com/'
+
+            //'https://web.archive.org/web/20061116082126/http://twitter.com/'
+            //'https://web.archive.org/web/20061230202933/http://twitter.com/'
+            //'https://web.archive.org/web/20070625105236/http://twitter.com/'
+            //'https://web.archive.org/web/20071226141149/http://twitter.com/'
+            //'https://web.archive.org/web/20080625170329/http://twitter.com/'
+            //'https://web.archive.org/web/20081226122836/http://twitter.com/'
+            //'https://web.archive.org/web/20090622090836/http://twitter.com/'
+            //'https://web.archive.org/web/20091224145340/http://twitter.com/'
+            //'https://web.archive.org/web/20100625230223/http://twitter.com/'
+            //'https://web.archive.org/web/20101225083758/https://twitter.com/'
+            //'https://web.archive.org/web/20110625022628/http://twitter.com/'
+            //'https://web.archive.org/web/20111225000126/http://twitter.com/'
+            //'https://web.archive.org/web/20120625005336/https://twitter.com/'
+            //'https://web.archive.org/web/20121225001023/https://twitter.com/'
+            //'https://web.archive.org/web/20130625001156/https://twitter.com/'
+            //'https://web.archive.org/web/20131225000044/https://twitter.com/'
+            //'https://web.archive.org/web/20140625000058/https://twitter.com/'
+            //'https://web.archive.org/web/20141225001607/https://twitter.com/'
+            //'https://web.archive.org/web/20150625003959/https://twitter.com/'
+
+            //'https://web.archive.org/web/20050625083655/http://www.ebay.com/'
+            //'https://web.archive.org/web/20051225084830/http://www.ebay.com/'
+            //'https://web.archive.org/web/20060625211535/http://www.ebay.com/?'
+            //'https://web.archive.org/web/20061225093652/http://www.ebay.com/'
+            //'https://web.archive.org/web/20070625083002/http://www.ebay.com/'
+            //'https://web.archive.org/web/20071215224300/http://www.ebay.com/'
+            //'https://web.archive.org/web/20080619211514/http://www.ebay.com/'
+            //'https://web.archive.org/web/20081225191116/http://www.ebay.com/'
+            //'https://web.archive.org/web/20090624075951/http://www.ebay.com/'
+            //'https://web.archive.org/web/20091224214205/http://www.ebay.com/'
+            //'https://web.archive.org/web/20100625145811/http://www.ebay.com/'
+            //'https://web.archive.org/web/20101225110427/http://www.ebay.com/'
+            //'https://web.archive.org/web/20110624223208/http://www.ebay.com/'
+            //'https://web.archive.org/web/20111225124300/http://www.ebay.com/'
+            //'https://web.archive.org/web/20120625024423/http://www.ebay.com/'
+            //'https://web.archive.org/web/20121225030528/http://www.ebay.com/'
+            //'https://web.archive.org/web/20130625024816/http://www.ebay.com/'
+            //'https://web.archive.org/web/20131225003001/http://www.ebay.com/'
+            //'https://web.archive.org/web/20140625004724/http://www.ebay.com/'
+            //'https://web.archive.org/web/20141225033456/http://www.ebay.com/'
+            //'https://web.archive.org/web/20150625022207/http://www.ebay.com/'
+
+            //'https://web.archive.org/web/20050625081306/http://www.msn.com/'
+            //'https://web.archive.org/web/20051225084921/http://www.msn.com/'
+            //'https://web.archive.org/web/20060627173526/http://www.msn.com/'
+            //'https://web.archive.org/web/20061225154238/http://www.msn.com/'
+            //'https://web.archive.org/web/20070624192315/http://www.msn.com/'
+            'https://web.archive.org/web/20071225141423/http://www.msn.com/'
+
+            ];
 
 //getAllTagNameElements() realiza uma consulta na estrutura da página html e retorna um Array de objetos(elementsName) com o atributo tagName de todos os elementos especificados na página.
 function getAllTagNameElements(){
@@ -385,13 +409,13 @@ var casper = require('casper').create();
 //casper.start(casper.cli.get(0));
 
 //Inicializando o casper com url fixa.
-casper.start("", function(){
-    this.echo(this.getTitle());
-});
+//casper.start("", function(){
+//});
 
-for(var i = 0; i < urls.length; i++){
-    //Realizando as consultas.
-    casper.thenOpen(urls[i], function(){
+casper.start().each(urls, function(casper, link) {
+    casper.thenOpen(link, function() {
+        this.echo(this.getCurrentUrl());
+        this.capture('20071225msn.jpg');
         result.div      = this.evaluate(getElements('div')).length;
         result.h1       = this.evaluate(getElements('h1')).length;
         result.h2       = this.evaluate(getElements('h2')).length;
@@ -450,9 +474,10 @@ for(var i = 0; i < urls.length; i++){
                    result.roles.timer      + "," + result.roles.toolbar    + "," + result.roles.tooltip      + "," + result.roles.tree         + "," +  result.roles.treegrid     + "," + result.roles.treeitem         + "," + result.arialabel           + "," + 
                    result.arialabelledby   + "," + result.ariadescribedby + "\n";   
         this.echo(texto);
-        fs.write('teste.csv',   texto, 'a');
+        fs.write('resultadoTCC.csv',   texto, 'a');
+
     });
-}
+});
 
 //Exibindo os resultados.
 casper.run(function(){
