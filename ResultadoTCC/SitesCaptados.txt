@@ -1,0 +1,55 @@
+1. Google.com - OK
+
+2. Facebook.com - OK
+
+3. Youtube.com - OK
+
+4. Baidu.com - Page cannot be crawled or displayed due to robots.txt.
+
+5. Yahoo.com - OK
+
+6. Amazon.com - Page cannot be crawled or displayed due to robots.txt.
+
+7. Wikipedia.org - OK
+
+8. Qq.com - Após o ano de 2009 o site é redirecionado a bolsa de valores.
+
+9. Twitter.com - OK
+
+10. Google.co.in - Já foi capturado o google.com, acho que os dados se tornariam um pouco redundantes.
+
+11. Taobao.com - Após o ano de 2010 algumas datas o site não estava sendo carregado direito (incompleto).
+
+12. live.com - OK
+
+13. Sina.com.cn - OK
+
+14. Linkedin - Page cannot be crawled or displayed due to robots.txt.
+
+15. Yahoo.co.jp - já foi coletado dados do yahoo.com achei que ficaria redundante.
+
+16. Weibo.com - Page cannot be crawled or displayed due to robots.txt.
+
+17. Ebay.com - OK
+
+18. Google.co.jp - já foi coletado o Google.com achei que ficaria redundante.
+
+19. Yandex.ru - OK
+
+20  vk.com - No ano de 2013 o site fica atualizando sem parar.
+
+21. hao123.com - Page cannot be crawled or displayed due to robots.txt.
+
+22. Blogsopt.com -Ano 2007 e 2008 Page cannot be crawled or displayed due to robots.txt.
+
+23. Bing.com - OK
+
+24. Google.de - Já foi captado dados do Google.com
+
+25. t.co - Page cannot be crawled or displayed due to robots.txt.
+
+26. Aliexpress - Ok
+
+27. Instagram - Ok
+
+28. Msn - OK
